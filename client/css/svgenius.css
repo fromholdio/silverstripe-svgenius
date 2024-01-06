@@ -1,0 +1,3 @@
+.gallery-item__thumbnail[style*=".svg"] {
+    background-size: contain;
+}

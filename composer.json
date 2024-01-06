@@ -1,0 +1,32 @@
+{
+  "name": "fromholdio/silverstripe-svgenius",
+  "type": "silverstripe-vendormodule",
+  "description": "First-class SVG handling for Silverstripe CMS & front-end",
+  "license": "BSD-3-Clause",
+  "keywords": ["silverstripe", "assets", "svg"],
+  "homepage": "https://github.com/fromholdio/silverstripe-svgenius",
+  "support": {
+    "issues": "https://github.com/fromholdio/silverstripe-svgenius/issues"
+  },
+  "authors": [{
+    "name": "Luke Fromhold",
+    "homepage": "https://fromhold.io"
+  }],
+  "require": {
+    "silverstripe/framework": "^5.0.0",
+    "enshrined/svg-sanitize": "^0.16.0",
+    "meyfa/php-svg": "^0.14.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fromholdio\\SVGenius\\": "src/"
+    }
+  },
+  "extra": {
+    "expose": [
+      "client"
+    ]
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}

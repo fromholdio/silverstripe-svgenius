@@ -1,0 +1,53 @@
+---
+Name: fromholdio-svgenius
+---
+
+SilverStripe\Assets\File:
+  extensions:
+    - Fromholdio\SVGenius\Extensions\SVGFileExtension
+  allowed_extensions:
+    - svg
+  app_categories:
+    image:
+      - svg
+    image/supported:
+      - svg
+  file_types:
+    svg: 'Scalable Vector Graphic (SVG)'
+  class_for_file_extension:
+    svg: 'Fromholdio\SVGenius\Model\SVGImage'
+
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_css:
+    - 'fromholdio/silverstripe-svgenius: client/css/svgenius.css'
+
+---
+Name: fromholdio-svgenius-imageformfactory
+After: focuspoint
+Only:
+  moduleexists: jonom/focuspoint
+---
+SilverStripe\AssetAdmin\Forms\ImageFormFactory:
+  extensions:
+    - Fromholdio\SVGenius\Extensions\SVGImageFormFactoryExtension
+
+---
+Name: fromholdio-svgenius-model
+After: '#assetsfieldtypes'
+---
+SilverStripe\Assets\Storage\DBFile:
+  supported_images:
+    - 'image/svg+xml'
+    - 'image/svg'
+
+---
+Name: fromholdio-svgenius-mimevalidator
+After: '#mimevalidator'
+Only:
+  moduleexists: silverstripe/mimevalidator
+---
+SilverStripe\MimeValidator\MimeUploadValidator:
+  MimeTypes:
+    svg:
+      - 'image/svg+xml'
+      - 'image/svg'

@@ -13,9 +13,9 @@
     "homepage": "https://fromhold.io"
   }],
   "require": {
-    "silverstripe/framework": "^5.0.0",
-    "enshrined/svg-sanitize": "^0.16.0",
-    "meyfa/php-svg": "^0.14.5"
+    "silverstripe/framework": "^6.0.0",
+    "enshrined/svg-sanitize": "^0.22.0",
+    "meyfa/php-svg": "^0.16.1"
   },
   "autoload": {
     "psr-4": {

@@ -2,7 +2,7 @@
 
 First-class SVG handling for Silverstripe CMS &amp; front-end.
 
-Requires Silverstripe 5+.
+Requires Silverstripe 6+.
 
 - SVGs can be uploaded into Asset Admin just like images
 - Thumbnail of SVG is displayed on Asset Admin grid view

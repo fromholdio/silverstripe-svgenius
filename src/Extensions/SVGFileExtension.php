@@ -2,9 +2,9 @@
 
 namespace Fromholdio\SVGenius\Extensions;
 
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 
-class SVGFileExtension extends DataExtension
+class SVGFileExtension extends Extension
 {
     public function IsSVG(): bool
     {

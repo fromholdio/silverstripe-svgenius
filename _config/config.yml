@@ -1,7 +1,6 @@
 ---
 Name: fromholdio-svgenius
 ---
-
 SilverStripe\Assets\File:
   extensions:
     - Fromholdio\SVGenius\Extensions\SVGFileExtension

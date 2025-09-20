@@ -80,9 +80,9 @@ trait SVGeniusTrait
         return $svg->toXMLString();
     }
 
-    public function getTag()
+    public function getTag(): string
     {
-        if (empty($this->svg)) return null;
+        if (empty($this->svg)) return '';
         return (string) $this->renderWith('DBFile_svg');
     }
 

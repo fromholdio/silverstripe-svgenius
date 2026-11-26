@@ -4,6 +4,7 @@ namespace Fromholdio\SVGenius;
 
 use enshrined\svgSanitize\Sanitizer;
 use SilverStripe\Assets\Storage\AssetContainer;
+use SilverStripe\Core\Validation\ValidationException;
 use SVG\SVG as SVGParser;
 
 trait SVGeniusTrait
@@ -46,7 +47,14 @@ trait SVGeniusTrait
     {
         if (empty($string)) return null;
         $sanitiser = new Sanitizer();
-        return $sanitiser->sanitize($string);
+        $sanitised = $sanitiser->sanitize($string);
+        if ($sanitised === false) {
+            throw new ValidationException(_t(
+                __CLASS__ . '.UNREADABLE_SVG',
+                'This SVG could not be read. Re-export it as a plain SVG and try again.'
+            ));
+        }
+        return $sanitised;
     }
 
 

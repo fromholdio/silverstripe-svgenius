@@ -12,7 +12,7 @@ class SVGReplaceFileAssetAdminExtension extends Extension
     protected function beforeCallActionHandler(HTTPRequest $request, $action): ?HTTPResponse
     {
         $name = $request->postVar('Upload')['name'] ?? '';
-        if ($action !== 'apiUploadFile' || strtolower(File::get_file_extension($name)) !== 'svg') {
+        if (strcasecmp($action, 'apiUploadFile') !== 0 || strtolower(File::get_file_extension($name)) !== 'svg') {
             return null;
         }
         $error = [

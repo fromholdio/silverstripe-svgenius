@@ -8,6 +8,7 @@ use RecursiveIteratorIterator;
 use SilverStripe\Assets\Dev\TestAssetStore;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Assets\Upload_Validator;
+use SilverStripe\Core\Validation\ValidationException;
 use SilverStripe\Dev\SapphireTest;
 
 class SVGImageTest extends SapphireTest
@@ -49,6 +50,27 @@ class SVGImageTest extends SapphireTest
         }
         $image->publishSingle();
 
+        $storedFiles = $this->getStoredSVGs();
+        $this->assertCount(1, $storedFiles);
+        $this->assertSame($image->getString(), $storedFiles[0]);
+        $this->assertStringContainsString('<circle', $storedFiles[0]);
+        $this->assertStringNotContainsString('script', $storedFiles[0]);
+        $this->assertStringNotContainsString('onload', $storedFiles[0]);
+    }
+
+    public function testUnreadableSVGIsRefusedAndNotStored(): void
+    {
+        $image = SVGImage::create();
+        try {
+            $image->setFromString('<svg xmlns="http://www.w3.org/2000/svg"><circle', 'broken.svg');
+            $this->fail('An unreadable SVG was accepted');
+        } catch (ValidationException $exception) {
+            $this->assertSame([], $this->getStoredSVGs());
+        }
+    }
+
+    protected function getStoredSVGs(): array
+    {
         $storedFiles = [];
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(TestAssetStore::base_path(), RecursiveDirectoryIterator::SKIP_DOTS));
         foreach ($iterator as $file) {
@@ -56,11 +78,6 @@ class SVGImageTest extends SapphireTest
                 $storedFiles[] = file_get_contents($file->getPathname());
             }
         }
-
-        $this->assertCount(1, $storedFiles);
-        $this->assertSame($image->getString(), $storedFiles[0]);
-        $this->assertStringContainsString('<circle', $storedFiles[0]);
-        $this->assertStringNotContainsString('script', $storedFiles[0]);
-        $this->assertStringNotContainsString('onload', $storedFiles[0]);
+        return $storedFiles;
     }
 }

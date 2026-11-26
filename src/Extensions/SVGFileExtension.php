@@ -13,6 +13,6 @@ class SVGFileExtension extends Extension
 
     public function getIsSVG(): bool
     {
-        return $this->getOwner()->getExtension() === 'svg';
+        return strtolower($this->getOwner()->getExtension()) === 'svg';
     }
 }

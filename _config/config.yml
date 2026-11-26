@@ -31,6 +31,13 @@ SilverStripe\AssetAdmin\Forms\ImageFormFactory:
     - Fromholdio\SVGenius\Extensions\SVGImageFormFactoryExtension
 
 ---
+Name: fromholdio-svgenius-editimage
+---
+SilverStripe\AssetAdmin\Forms\ImageFormFactory:
+  extensions:
+    - Fromholdio\SVGenius\Extensions\SVGEditImageFormFactoryExtension
+
+---
 Name: fromholdio-svgenius-model
 After: '#assetsfieldtypes'
 ---

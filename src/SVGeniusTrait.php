@@ -50,7 +50,7 @@ trait SVGeniusTrait
         $sanitised = $sanitiser->sanitize($string);
         if ($sanitised === false) {
             throw new ValidationException(_t(
-                __CLASS__ . '.UNREADABLE_SVG',
+                __TRAIT__ . '.UNREADABLE_SVG',
                 'This SVG could not be read. Re-export it as a plain SVG and try again.'
             ));
         }

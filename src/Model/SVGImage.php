@@ -51,7 +51,11 @@ class SVGImage extends Image
 
     public function setFromString($data, $filename, $hash = null, $variant = null, $config = []): array
     {
-        return parent::setFromString($this->sanitiseSVGString($data), $filename, $variant ? $hash : null, $variant, $config);
+        if (!$variant) {
+            $data = $this->sanitiseSVGString($data);
+            $hash = null;
+        }
+        return parent::setFromString($data, $filename, $hash, $variant, $config);
     }
 
 

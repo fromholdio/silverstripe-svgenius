@@ -21,6 +21,16 @@ SilverStripe\Admin\LeftAndMain:
     - 'fromholdio/silverstripe-svgenius: client/css/svgenius.css'
 
 ---
+Name: fromholdio-svgenius-replacefile
+---
+SilverStripe\AssetAdmin\Forms\ImageFormFactory:
+  extensions:
+    - Fromholdio\SVGenius\Extensions\SVGReplaceFileFormFactoryExtension
+SilverStripe\AssetAdmin\Controller\AssetAdmin:
+  extensions:
+    - Fromholdio\SVGenius\Extensions\SVGReplaceFileAssetAdminExtension
+
+---
 Name: fromholdio-svgenius-imageformfactory
 After: focuspoint
 Only:

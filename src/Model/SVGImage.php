@@ -5,6 +5,7 @@ namespace Fromholdio\SVGenius\Model;
 use Fromholdio\SVGenius\SVGeniusTrait;
 use SilverStripe\Assets\Image;
 use SilverStripe\Assets\Storage\AssetContainer;
+use SilverStripe\Assets\Util;
 use SVG\SVG as SVGParser;
 
 class SVGImage extends Image
@@ -32,6 +33,29 @@ class SVGImage extends Image
         );
         $this->svg = SVGParser::fromString($sanitisedString);
         parent::onBeforeWrite();
+    }
+
+    public function setFromLocalFile($path, $filename = null, $hash = null, $variant = null, $config = []): array
+    {
+        if (!is_readable($path ?? '')) {
+            return parent::setFromLocalFile($path, $filename, $hash, $variant, $config);
+        }
+        return $this->setFromString(file_get_contents($path), $filename ?: basename($path), $hash, $variant, $config);
+    }
+
+    public function setFromStream($stream, $filename, $hash = null, $variant = null, $config = []): array
+    {
+        Util::rewindStream($stream);
+        return $this->setFromString(stream_get_contents($stream), $filename, $hash, $variant, $config);
+    }
+
+    public function setFromString($data, $filename, $hash = null, $variant = null, $config = []): array
+    {
+        if (!$variant) {
+            $data = $this->sanitiseSVGString($data);
+            $hash = null;
+        }
+        return parent::setFromString($data, $filename, $hash, $variant, $config);
     }
 
 

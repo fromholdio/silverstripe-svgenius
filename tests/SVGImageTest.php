@@ -42,7 +42,11 @@ class SVGImageTest extends SapphireTest
         ];
 
         $image = SVGImage::create();
-        $this->assertTrue(Upload::create()->loadIntoFile($tmpFile, $image));
+        try {
+            $this->assertTrue(Upload::create()->loadIntoFile($tmpFile, $image));
+        } finally {
+            unlink($path);
+        }
         $image->publishSingle();
 
         $storedFiles = [];
